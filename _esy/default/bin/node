@@ -1,4 +1,0 @@
-#!/bin/sh
-export ESY__NODE_BIN_PATH="/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/bin"
-exec "/usr/local/bin/node" -r "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/pnp.js" "$@"
-              

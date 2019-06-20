@@ -1,5 +1,0 @@
-(** @canonical Mh2.GraphqlResolver *)
-module GraphqlResolver = Mh2__GraphqlResolver
-
-(** @canonical Mh2.Server *)
-module Server = Mh2__Server

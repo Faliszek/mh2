@@ -1,9 +1,0 @@
-package "lib" (
-  directory = "lib"
-  description = ""
-  requires = "cohttp cohttp-lwt-unix graphql graphql-cohttp graphql-lwt unix"
-  archive(byte) = "Mh2.cma"
-  archive(native) = "Mh2.cmxa"
-  plugin(byte) = "Mh2.cma"
-  plugin(native) = "Mh2.cmxs"
-)
