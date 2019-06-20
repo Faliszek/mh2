@@ -29,9 +29,10 @@ let user =
   );
 
 let token = "asdasdasdasdas";
+
 let loginPayload =
   Schema.(
-    obj("result", ~doc="Login auth result", ~fields=_ =>
+    obj("Result", ~doc="Login auth result", ~fields=_ =>
       [
         io_field(
           "token", ~typ=non_null(string), ~args=Arg.[], ~resolve=(ctx, s) =>
