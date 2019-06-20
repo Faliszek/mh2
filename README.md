@@ -4,7 +4,7 @@
 
 ```
 npm install -g esy
-git clone <this-repo>
+git clone git@github.com:Faliszek/mh2.git
 esy install
 esy build
 ```
