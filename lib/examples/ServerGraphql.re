@@ -1,3 +1,5 @@
+open Lwt.Infix;
+
 module Graphql_cohttp_lwt =
   Graphql_cohttp.Make(
     Graphql_lwt.Schema,
@@ -5,14 +7,7 @@ module Graphql_cohttp_lwt =
     Cohttp_lwt.Body,
   );
 
-let schema: Graphql_lwt.Schema.schema(unit) =
-  Graphql_lwt.Schema.(schema([], ~mutations=[Auth.loginMutation]));
-
-let run = (~addres="127.0.0.1", ~port=6789, ()) => {
-  // open Cohttp;
-
-  open Cohttp_lwt_unix;
-
+let run = () => {
   let on_exn =
     fun
     | [@implicit_arity] Unix.Unix_error(error, func, arg) =>
@@ -25,9 +20,9 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
         )
       )
     | exn => Logs.err(m => m("Unhandled exception: %a", Fmt.exn, exn));
-  ();
-  let callback = Graphql_cohttp_lwt.make_callback(_req => (), schema);
+
+  let callback = Graphql_cohttp_lwt.make_callback(_req => (), Other.schema);
   let server = Cohttp_lwt_unix.Server.make_response_action(~callback, ());
-  let mode = `TCP(`Port(port));
-  Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
+  let mode = `TCP(`Port(8080));
+  Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server) |> Lwt_main.run;
 };
