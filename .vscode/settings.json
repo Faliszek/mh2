@@ -5,7 +5,7 @@
     "esy.lock": true,
     "node_modules": true,
     "**/.DS_Store": true,
-    "**/dune": true,
-    "**/.merlin": true
+    "**/dune": true
+    // "**/.merlin": true
   }
 }
