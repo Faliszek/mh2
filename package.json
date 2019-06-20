@@ -1,0 +1,48 @@
+{
+  "name": "mh2",
+  "version": "0.0.0",
+  "description": "My Project",
+  "esy": {
+    "build": "pesy",
+    "release": { "releasedBinaries": [ "Server.exe" ] }
+  },
+  "buildDirs": {
+    "test": {
+      "require": [ "mh2.lib" ],
+      "main": "TestMh2",
+      "name": "TestMh2.exe"
+    },
+    "lib": {
+      "require": [
+        "unix", "graphql", "graphql-lwt", "graphql-cohttp", "cohttp",
+        "cohttp-lwt-unix"
+      ],
+      "name": "mh2.lib",
+      "namespace": "Mh2"
+    },
+    "bin": {
+      "require": [ "mh2.lib" ],
+      "main": "Server",
+      "name": "Server.exe"
+    }
+  },
+  "scripts": {
+    "pesy": "bash -c 'env PESY_MODE=update pesy'",
+    "test": "esy x TestMh2.exe",
+    "run": "esy x Server.exe"
+  },
+  "dependencies": {
+    "@esy-ocaml/reason": "*",
+    "@opam/cohttp": "2.1.2",
+    "@opam/cohttp-lwt-unix": "2.0.0",
+    "@opam/graphql": "0.9.0",
+    "@opam/graphql-cohttp": "0.12.1",
+    "@opam/graphql-lwt": "0.9.0",
+    "@opam/lwt": "4.1.0",
+    "@opam/yojson": "*",
+    "ocaml": "4.7.1004",
+    "pesy": "*",
+    "refmterr": "*"
+  },
+  "devDependencies": { "@opam/merlin": "*" }
+}
