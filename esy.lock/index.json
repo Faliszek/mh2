@@ -1,5 +1,5 @@
 {
-  "checksum": "ce2bdfb94cbc5449765bddcdd0dfe11c",
+  "checksum": "17d5ff84501acbcf651c716d324b93a4",
   "root": "mh2@link-dev:./package.json",
   "node": {
     "refmterr@3.1.10@d41d8cd9": {
@@ -19,14 +19,14 @@
       ],
       "devDependencies": []
     },
-    "pesy@0.4.2@d41d8cd9": {
-      "id": "pesy@0.4.2@d41d8cd9",
+    "pesy@0.4.3@d41d8cd9": {
+      "id": "pesy@0.4.3@d41d8cd9",
       "name": "pesy",
-      "version": "0.4.2",
+      "version": "0.4.3",
       "source": {
         "type": "install",
         "source": [
-          "archive:https://registry.npmjs.org/pesy/-/pesy-0.4.2.tgz#sha1:ba28bee662f274fa5755f76f43ccb8d46a51d02e"
+          "archive:https://registry.npmjs.org/pesy/-/pesy-0.4.3.tgz#sha1:d3a5e9f5df853d3fd6d35229d939ce923fb6dd8f"
         ]
       },
       "overrides": [],
@@ -58,12 +58,11 @@
       },
       "overrides": [],
       "dependencies": [
-        "refmterr@3.1.10@d41d8cd9", "pesy@0.4.2@d41d8cd9",
+        "refmterr@3.1.10@d41d8cd9", "pesy@0.4.3@d41d8cd9",
         "ocaml@4.7.1004@d41d8cd9", "@opam/yojson@opam:1.7.0@2d92307e",
         "@opam/lwt@opam:4.1.0@4db5bd2a",
         "@opam/graphql-lwt@opam:0.9.0@5b1d17a4",
         "@opam/graphql-cohttp@opam:0.12.1@33f0a968",
-        "@opam/graphql@opam:0.9.0@20b3dd7d",
         "@opam/cohttp-lwt-unix@opam:2.0.0@2055e2ef",
         "@opam/cohttp@opam:2.1.2@0821c01b",
         "@esy-ocaml/reason@3.4.0@d41d8cd9"

@@ -1,5 +1,5 @@
 npm-debug.log
-.merlin
+
 yarn-error.log
 node_modules
 node_modules/
@@ -9,3 +9,7 @@ _esy/
 mh2.install
 .DS_Store
 *.install
+
+lib/.merlin
+bin/.merlin
+test/.merlin

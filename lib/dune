@@ -7,5 +7,5 @@
    (name Mh2)
    ; Other libraries list this name in their package.json 'require' field to use this library.
    (public_name mh2.lib)
-   (libraries  unix graphql graphql-lwt graphql-cohttp cohttp cohttp-lwt-unix )
+   (libraries  unix graphql-lwt graphql-cohttp cohttp cohttp-lwt-unix )
 )
