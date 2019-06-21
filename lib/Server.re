@@ -5,12 +5,10 @@ module Graphql_cohttp_lwt =
     Cohttp_lwt.Body,
   );
 
-let schema: Graphql_lwt.Schema.schema(unit) =
+let schema =
   Graphql_lwt.Schema.(schema([], ~mutations=[Auth.loginMutation]));
 
 let run = (~addres="127.0.0.1", ~port=6789, ()) => {
-  // open Cohttp;
-
   open Cohttp_lwt_unix;
 
   let on_exn =
@@ -24,6 +22,7 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
           arg,
         )
       )
+
     | exn => Logs.err(m => m("Unhandled exception: %a", Fmt.exn, exn));
   ();
   let callback = Graphql_cohttp_lwt.make_callback(_req => (), schema);

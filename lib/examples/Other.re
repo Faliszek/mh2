@@ -31,9 +31,9 @@ let numberMutation =
       "add_random",
       ~typ=non_null(list(non_null(int))),
       ~args=Arg.[arg("number", ~typ=non_null(int))],
-      ~resolve=(_, (), number)
-      // numbers := [number, ...numbers^];
-      => numbers)
+      ~resolve=(_, (), number) =>
+      numbers
+    )
   );
 
 let schema =
