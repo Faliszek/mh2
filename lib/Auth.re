@@ -4,37 +4,24 @@ let token = "asd";
 let authErrors = [];
 
 type tokenPayloadDTO = {token: string};
-type authError = [ | `INVALID_EMAIL];
+type authError =
+  | INVALID_EMAIL;
 
-type loginResponse = {
-  result: option(tokenPayloadDTO),
-  errors: list(authError),
-};
+type loginResponse = {result: option(tokenPayloadDTO)};
 
 let tokenValue = token;
 
-let authError =
+let authError: Graphql_lwt.Schema.typ(unit, option(authError)) =
   Schema.(
     enum(
-      "error",
+      "Error",
       ~values=[
         enum_value(
           "INVALID_EMAIL",
-          ~value=`INVALID_EMAIL,
+          ~value=INVALID_EMAIL,
           ~doc="Invalid email error",
         ),
       ],
-    )
-  );
-
-let authErrors =
-  Schema.(
-    io_field(
-      "errors",
-      ~typ=non_null(list(authError)),
-      ~args=Arg.[],
-      ~resolve=(ctx, a) =>
-      Lwt_result.return(a)
     )
   );
 
@@ -45,7 +32,7 @@ let token =
     )
   );
 
-let result = Schema.(obj("result", ~fields=_ => [token]));
+let result = Schema.(obj("LoginResult", ~fields=_ => [token]));
 
 let resultField =
   Schema.(
@@ -57,7 +44,7 @@ let resultField =
 
 let loginResponse: Graphql_lwt.Schema.typ(unit, option(tokenPayloadDTO)) =
   Schema.(
-    obj("Result", ~doc="Login auth result", ~fields=_ =>
+    obj("LoginResponse", ~doc="Login auth result", ~fields=_ =>
       [
         io_field(
           "result", ~typ=non_null(result), ~args=Arg.[], ~resolve=(ctx, s) =>
@@ -68,7 +55,7 @@ let loginResponse: Graphql_lwt.Schema.typ(unit, option(tokenPayloadDTO)) =
           ~typ=non_null(list(authError)),
           ~args=Arg.[],
           ~resolve=(ctx, s) =>
-          Lwt_result.return([])
+          Lwt_result.return([Some(INVALID_EMAIL)])
         ),
       ]
     )
@@ -83,7 +70,11 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
           arg("email", ~typ=non_null(string)),
           arg("password", ~typ=non_null(string)),
         ],
-      ~resolve=(ctx, result, email, password) =>
-      Lwt_result.return({result: Some({token: tokenValue}), errors: []})
+      ~resolve=(ctx, _, email, password) =>
+      Lwt_result.return(
+        {
+          {token: tokenValue};
+        },
+      )
     )
   );
