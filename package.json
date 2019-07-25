@@ -24,7 +24,16 @@
         "graphql-lwt",
         "graphql-cohttp",
         "cohttp",
-        "cohttp-lwt-unix"
+        "cohttp-lwt-unix",
+        "safepass",
+        "ppx_pgsql",
+        "pgocaml",
+        "tablecloth-native"
+      ],
+      "preprocess": [
+        "pps",
+        "ppx_pgsql",
+        "ppxlib.runner"
       ],
       "name": "mh2.lib",
       "namespace": "Mh2"
@@ -44,12 +53,16 @@
   },
   "dependencies": {
     "@esy-ocaml/reason": "*",
+    "@opam/pgocaml": "2.3",
+    "@opam/ppx_pgsql": "tizoc/ppx_pgsql:ppx_pgsql.opam",
     "@opam/cohttp": "2.1.2",
     "@opam/cohttp-lwt-unix": "2.0.0",
     "@opam/graphql-cohttp": "0.12.1",
     "@opam/graphql-lwt": "0.9.0",
     "@opam/lwt": "4.1.0",
+    "@opam/safepass": "3.0",
     "@opam/yojson": "*",
+    "@opam/tablecloth-native": "*",
     "ocaml": "4.7.1004",
     "pesy": "*",
     "refmterr": "*"

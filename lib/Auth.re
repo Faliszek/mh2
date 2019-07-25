@@ -5,7 +5,8 @@ let authErrors = [];
 
 type tokenPayloadDTO = {token: string};
 type authError =
-  | INVALID_EMAIL;
+  | InvalidEmail
+  | WrongCredentials;
 
 type loginResponse = {result: option(tokenPayloadDTO)};
 
@@ -14,11 +15,16 @@ let tokenValue = token;
 let authError: Graphql_lwt.Schema.typ(unit, option(authError)) =
   Schema.(
     enum(
-      "Error",
+      "AuthenticateResponseError",
       ~values=[
         enum_value(
           "INVALID_EMAIL",
-          ~value=INVALID_EMAIL,
+          ~value=InvalidEmail,
+          ~doc="Invalid email error",
+        ),
+        enum_value(
+          "INVALID_CREDENTIALS",
+          ~value=WrongCredentials,
           ~doc="Invalid email error",
         ),
       ],
@@ -51,15 +57,19 @@ let loginResponse: Graphql_lwt.Schema.typ(unit, option(tokenPayloadDTO)) =
           Lwt_result.return(s)
         ),
         io_field(
-          "errors",
-          ~typ=non_null(list(authError)),
-          ~args=Arg.[],
-          ~resolve=(ctx, s) =>
-          Lwt_result.return([Some(INVALID_EMAIL)])
+          "errors", ~typ=list(authError), ~args=Arg.[], ~resolve=(ctx, s) =>
+          Lwt_result.return(None)
         ),
       ]
     )
   );
+
+let createToken = (~email, ~password) => {
+  let hashedPassword = Bcrypt.hash(password);
+
+  print_endline(hashedPassword |> Bcrypt.string_of_hash);
+};
+
 let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
   Schema.(
     io_field(
@@ -70,11 +80,17 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
           arg("email", ~typ=non_null(string)),
           arg("password", ~typ=non_null(string)),
         ],
-      ~resolve=(ctx, _, email, password) =>
-      Lwt_result.return(
-        {
-          {token: tokenValue};
-        },
-      )
+      ~resolve=(ctx, _, email, password) => {
+        Db.User.get
+        |> List.map((u: Db.User.t) => print_endline(u.id))
+        |> ignore;
+
+        createToken(~email, ~password);
+        Lwt_result.return(
+          {
+            {token: tokenValue};
+          },
+        );
+      },
     )
   );

@@ -24,9 +24,11 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
       )
 
     | exn => Logs.err(m => m("Unhandled exception: %a", Fmt.exn, exn));
-  ();
   let callback = Graphql_cohttp_lwt.make_callback(_req => (), schema);
   let server = Cohttp_lwt_unix.Server.make_response_action(~callback, ());
   let mode = `TCP(`Port(port));
+  let port = port |> string_of_int;
+  print_endline("🐫 Server GraphQL running on " ++ port);
+  Db.connect();
   Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
 };

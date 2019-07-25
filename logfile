@@ -1,0 +1,41 @@
+2019-06-27 21:50:30.215 CEST [26313] LOG:  could not bind IPv6 address "::1": Address already in use
+2019-06-27 21:50:30.215 CEST [26313] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2019-06-27 21:50:30.215 CEST [26313] LOG:  could not bind IPv4 address "127.0.0.1": Address already in use
+2019-06-27 21:50:30.215 CEST [26313] HINT:  Is another postmaster already running on port 5432? If not, wait a few seconds and retry.
+2019-06-27 21:50:30.216 CEST [26313] WARNING:  could not create listen socket for "localhost"
+2019-06-27 21:50:30.216 CEST [26313] FATAL:  could not create any TCP/IP sockets
+2019-06-27 21:50:30.216 CEST [26313] LOG:  database system is shut down
+2019-06-27 21:52:13.546 CEST [26443] FATAL:  lock file "postmaster.pid" already exists
+2019-06-27 21:52:13.546 CEST [26443] HINT:  Is another postmaster (PID 26402) running in data directory "/usr/local/var/postgres"?
+2019-06-27 21:52:55.985 CEST [26509] LOG:  listening on IPv6 address "::1", port 5432
+2019-06-27 21:52:55.986 CEST [26509] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-06-27 21:52:55.987 CEST [26509] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-06-27 21:52:56.000 CEST [26510] LOG:  database system was shut down at 2019-06-27 21:52:47 CEST
+2019-06-27 21:52:56.004 CEST [26509] LOG:  database system is ready to accept connections
+2019-06-27 21:53:01.580 CEST [26527] FATAL:  database "pawelfalisz" does not exist
+2019-06-27 21:53:48.044 CEST [26582] FATAL:  could not open relation mapping file "global/pg_filenode.map": No such file or directory
+2019-06-27 21:53:48.047 CEST [26583] FATAL:  could not open relation mapping file "global/pg_filenode.map": No such file or directory
+2019-06-27 21:53:56.019 CEST [26515] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2019-06-27 21:53:56.704 CEST [26515] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2019-06-27 21:53:56.704 CEST [26515] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2019-06-27 21:53:57.398 CEST [26515] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2019-06-27 21:53:57.398 CEST [26515] LOG:  could not open temporary statistics file "pg_stat_tmp/global.tmp": No such file or directory
+2019-06-27 21:53:57.438 CEST [26509] LOG:  could not open file "postmaster.pid": No such file or directory
+2019-06-27 21:53:57.438 CEST [26509] LOG:  performing immediate shutdown because data directory lock file is invalid
+2019-06-27 21:53:57.438 CEST [26509] LOG:  received immediate shutdown request
+2019-06-27 21:53:57.439 CEST [26509] LOG:  could not open file "postmaster.pid": No such file or directory
+2019-06-27 21:53:57.439 CEST [26514] WARNING:  terminating connection because of crash of another server process
+2019-06-27 21:53:57.439 CEST [26514] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2019-06-27 21:53:57.439 CEST [26514] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2019-06-27 21:53:57.440 CEST [26515] LOG:  could not open temporary statistics file "pg_stat/global.tmp": No such file or directory
+2019-06-27 21:53:57.443 CEST [26509] LOG:  database system is shut down
+2019-06-27 21:54:04.076 CEST [26606] LOG:  listening on IPv6 address "::1", port 5432
+2019-06-27 21:54:04.077 CEST [26606] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2019-06-27 21:54:04.077 CEST [26606] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2019-06-27 21:54:04.093 CEST [26607] LOG:  database system was shut down at 2019-06-27 21:53:37 CEST
+2019-06-27 21:54:04.097 CEST [26606] LOG:  database system is ready to accept connections
+2019-06-27 21:54:06.399 CEST [26624] FATAL:  database "pawelfalisz" does not exist
+2019-07-01 16:21:41.037 CEST [26606] LOG:  received smart shutdown request
+2019-07-01 16:21:41.040 CEST [26606] LOG:  background worker "logical replication launcher" (PID 26613) exited with exit code 1
+2019-07-01 16:21:41.040 CEST [26608] LOG:  shutting down
+2019-07-01 16:21:41.051 CEST [26606] LOG:  database system is shut down
