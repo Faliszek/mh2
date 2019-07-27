@@ -20,7 +20,6 @@
     },
     "lib": {
       "require": [
-        "unix",
         "graphql-lwt",
         "graphql-cohttp",
         "cohttp",
@@ -33,7 +32,8 @@
       "preprocess": [
         "pps",
         "ppx_pgsql",
-        "ppxlib.runner"
+        "ppxlib.runner",
+        "lwt_ppx"
       ],
       "name": "mh2.lib",
       "namespace": "Mh2"
@@ -60,6 +60,7 @@
     "@opam/graphql-cohttp": "0.12.1",
     "@opam/graphql-lwt": "0.9.0",
     "@opam/lwt": "4.1.0",
+    "@opam/lwt_ppx": "*",
     "@opam/safepass": "3.0",
     "@opam/yojson": "*",
     "@opam/tablecloth-native": "*",

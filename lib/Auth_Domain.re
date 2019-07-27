@@ -7,6 +7,7 @@ let authenticateUser = (~email, ~password) => {
 
 let createToken = (~email, ~password) => {
   let hashedPassword = Bcrypt.hash(password);
+  // let allow = (args) => "hello";
 
   print_endline(hashedPassword |> Bcrypt.string_of_hash);
 };
