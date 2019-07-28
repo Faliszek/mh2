@@ -29,5 +29,6 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   let mode = `TCP(`Port(port));
   let port = port |> string_of_int;
   print_endline("🐫 Server GraphQL running on " ++ port);
+  Db.connect();
   Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
 };

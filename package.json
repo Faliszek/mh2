@@ -6,7 +6,8 @@
     "build": "pesy",
     "release": {
       "releasedBinaries": [
-        "Server.exe"
+        "Server.exe",
+        "Sql_Example.exe"
       ]
     }
   },

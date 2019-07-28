@@ -8,7 +8,6 @@
     // "**/dune": true,
     "**/.merlin": true
   },
-  "reason_language_server.opens_codelens": true,
   "reason_language_server.reloadOnChange": true,
   "reason_language_server.show_debug_errors": true
 }

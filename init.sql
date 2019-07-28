@@ -1,5 +1,5 @@
 
-create table users (user_id varchar(255), email varchar(255), password text);
+create table users (user_id varchar(255) not null, email varchar(255) not  null, password text not null);
 
 
 INSERT INTO users (user_id, email, password)
