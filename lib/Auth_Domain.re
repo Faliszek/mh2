@@ -1,4 +1,4 @@
-type user = Db.User.t;
+open Db;
 
 let createToken = (~email, ~password) => {
   let hashedPassword = Bcrypt.hash(password);
@@ -11,11 +11,13 @@ let createToken = (~email, ~password) => {
 //with informaiton if email exist, option(token) etc.
 let authenticateUser = (~email, ~password) => {
   Db.User.getByEmail(~email)
-  |> Lwt.map((user: option(user)) => {
-       let hashedPassword = Bcrypt.hash(password) |> Bcrypt.string_of_hash;
+  |> Lwt.map((user: option(User.t)) => {
        switch (user) {
-       | Some(user) when user.password == hashedPassword => true
+       | Some(user)
+           when
+             Bcrypt.verify(password, user.password |> Bcrypt.hash_of_string) =>
+         true
        | _ => false
-       };
+       }
      });
 };
