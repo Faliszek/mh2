@@ -27,7 +27,9 @@
         "safepass",
         "ppx_pgsql",
         "pgocaml",
-        "tablecloth-native"
+        "tablecloth-native",
+        "jwto",
+        "unix"
       ],
       "preprocess": [
         "pps",

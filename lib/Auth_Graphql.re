@@ -1,10 +1,11 @@
 open Graphql_lwt;
+open Tablecloth;
 open Auth_Domain;
 
 let token = "asd";
 let authErrors = [];
 
-type tokenPayloadDTO = {token: string};
+type tokenPayloadDTO = {token: option(string)};
 type authError =
   | InvalidEmail
   | WrongCredentials;
@@ -34,7 +35,7 @@ let authError: Graphql_lwt.Schema.typ(unit, option(authError)) =
 
 let token =
   Schema.(
-    io_field("token", ~typ=non_null(string), ~args=Arg.[], ~resolve=(ctx, s) =>
+    io_field("token", ~typ=string, ~args=Arg.[], ~resolve=(ctx, s) =>
       Lwt_result.return(s.token)
     )
   );
@@ -76,11 +77,10 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
           arg("password", ~typ=non_null(string)),
         ],
       ~resolve=(ctx, _, email, password) => {
-        let bool = authenticateUser(~email, ~password) |> Lwt_main.run;
-
+        let token = authenticateUser(~email, ~password) |> Lwt_main.run;
         Lwt_result.return(
           {
-            {token: tokenValue};
+            {token: token};
           },
         );
       },
