@@ -76,13 +76,7 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
           arg("password", ~typ=non_null(string)),
         ],
       ~resolve=(ctx, _, email, password) => {
-        let authOk = authenticateUser(~email, ~password) |> Lwt_main.run;
-
-        if (authOk) {
-          print_endline("AUTH OK");
-        } else {
-          print_endline("NO TOKEN FOR YOU");
-        };
+        let bool = authenticateUser(~email, ~password) |> Lwt_main.run;
 
         Lwt_result.return(
           {

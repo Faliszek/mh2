@@ -6,8 +6,7 @@
     "build": "pesy",
     "release": {
       "releasedBinaries": [
-        "Server.exe",
-        "Sql_Example.exe"
+        "Server.exe"
       ]
     }
   },
@@ -64,6 +63,7 @@
     "@opam/lwt_ppx": "*",
     "@opam/safepass": "3.0",
     "@opam/yojson": "*",
+    "@opam/jwto": "*",
     "@opam/tablecloth-native": "*",
     "ocaml": "4.7.1004",
     "pesy": "*",

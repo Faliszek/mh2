@@ -17,6 +17,7 @@ let authenticateUser = (~email, ~password) => {
            when
              Bcrypt.verify(password, user.password |> Bcrypt.hash_of_string) =>
          true
+
        | _ => false
        }
      });

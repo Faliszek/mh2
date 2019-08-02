@@ -38,7 +38,7 @@ module User = {
     let getByEmail = [%sqlf
       {|
        SELECT * FROM users WHERE email = $email LIMIT 1;
-    |}
+      |}
     ];
   };
 
@@ -47,7 +47,7 @@ module User = {
     |> runQuery
     |> Lwt.map(user => {
          user
-         |> List.getAt(~index=0)
+         |> List.head
          |> Option.map(~f=((id, email, password)) => {id, email, password})
        });
   // module Query = {s
