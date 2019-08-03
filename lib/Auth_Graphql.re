@@ -5,12 +5,15 @@ open Auth_Domain;
 let token = "asd";
 let authErrors = [];
 
-type tokenPayloadDTO = {token: option(string)};
 type authError =
-  | InvalidEmail
   | WrongCredentials;
 
-type loginResponse = {result: option(tokenPayloadDTO)};
+type tokenPayloadDTO = {token: string};
+
+type loginResponse = {
+  result: option(tokenPayloadDTO),
+  errors: option(list(authError)),
+};
 
 let tokenValue = token;
 
@@ -19,11 +22,6 @@ let authError: Graphql_lwt.Schema.typ(unit, option(authError)) =
     enum(
       "AuthenticateResponseError",
       ~values=[
-        enum_value(
-          "INVALID_EMAIL",
-          ~value=InvalidEmail,
-          ~doc="Invalid email error",
-        ),
         enum_value(
           "INVALID_CREDENTIALS",
           ~value=WrongCredentials,
@@ -35,7 +33,7 @@ let authError: Graphql_lwt.Schema.typ(unit, option(authError)) =
 
 let token =
   Schema.(
-    io_field("token", ~typ=string, ~args=Arg.[], ~resolve=(ctx, s) =>
+    io_field("token", ~typ=non_null(string), ~args=Arg.[], ~resolve=(ctx, s) =>
       Lwt_result.return(s.token)
     )
   );
@@ -44,24 +42,25 @@ let result = Schema.(obj("LoginResult", ~fields=_ => [token]));
 
 let resultField =
   Schema.(
-    io_field(
-      "result", ~typ=non_null(result), ~args=Arg.[], ~resolve=(ctx, r) =>
-      Lwt_result.return({token: r.token})
+    io_field("result", ~typ=result, ~args=Arg.[], ~resolve=(ctx, r) =>
+      Lwt_result.return(Some({token: r.token}))
     )
   );
 
-let loginResponse: Graphql_lwt.Schema.typ(unit, option(tokenPayloadDTO)) =
+let loginResponse: Graphql_lwt.Schema.typ(unit, option(loginResponse)) =
   Schema.(
     obj("LoginResponse", ~doc="Login auth result", ~fields=_ =>
       [
-        io_field(
-          "result", ~typ=non_null(result), ~args=Arg.[], ~resolve=(ctx, s) =>
-          Lwt_result.return(s)
+        io_field("result", ~typ=result, ~args=Arg.[], ~resolve=(ctx, s) =>
+          Lwt_result.return(s.result)
         ),
         io_field(
-          "errors", ~typ=list(authError), ~args=Arg.[], ~resolve=(ctx, s) =>
-          Lwt_result.return(None)
-        ),
+          "errors",
+          ~typ=list(non_null(authError)),
+          ~args=Arg.[],
+          ~resolve=(ctx, s) => {
+          s.errors |> Lwt_result.return
+        }),
       ]
     )
   );
@@ -78,11 +77,12 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
         ],
       ~resolve=(ctx, _, email, password) => {
         let token = authenticateUser(~email, ~password) |> Lwt_main.run;
-        Lwt_result.return(
-          {
-            {token: token};
-          },
-        );
+        let loginResponse =
+          switch (token) {
+          | Some(token) => {errors: Some([]), result: Some({token: token})}
+          | None => {errors: Some([WrongCredentials]), result: None}
+          };
+        Lwt_result.return(loginResponse);
       },
     )
   );
