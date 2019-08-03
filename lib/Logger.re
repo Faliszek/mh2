@@ -7,3 +7,13 @@ let databaseConnectionError = exn => {
     "install postgresql and run pg_ctl -D /usr/local/var/postgres start and then try again",
   );
 };
+
+let serverStartSuccess = (~port) => {
+  let port = port |> string_of_int;
+
+  print_endline("🐫 Server GraphQL running on " ++ port);
+};
+
+let serverStartFailure = exn => {
+  Logs.err(m => m("❌ Unhandled exception: %a", Fmt.exn, exn));
+};

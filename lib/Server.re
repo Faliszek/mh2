@@ -10,9 +10,8 @@ let schema =
 
 let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   open Cohttp_lwt_unix;
-
-  Db.connect()
-  |> Db.Lwt_thread.on_failure(_, exn => {Logger.databaseConnectionError(exn)});
+  //TODO: handle failure better, also dont run server if connection is not established
+  Db.connect() |> Db.Lwt_thread.on_failure(_, Logger.databaseConnectionError);
 
   let on_exn =
     fun
@@ -26,11 +25,12 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
         )
       )
 
-    | exn => Logs.err(m => m("Unhandled exception: %a", Fmt.exn, exn));
+    | exn => Logger.serverStartFailure(exn);
+
   let callback = Graphql_cohttp_lwt.make_callback(_req => (), schema);
   let server = Cohttp_lwt_unix.Server.make_response_action(~callback, ());
   let mode = `TCP(`Port(port));
-  let port = port |> string_of_int;
-  print_endline("🐫 Server GraphQL running on " ++ port);
+
   Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
+  Logger.serverStartSuccess(~port);
 };
