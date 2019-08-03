@@ -1,4 +1,4 @@
-let databaseConnectionError = (~port, exn) => {
+let databaseConnectionError = exn => {
   print_endline(Printexc.to_string(exn));
   print_endline(
     "❌ Error occured, connection to database  was not established!",

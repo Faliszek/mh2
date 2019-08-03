@@ -12,9 +12,7 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   open Cohttp_lwt_unix;
 
   Db.connect()
-  |> Db.Lwt_thread.on_failure(_, exn => {
-       Logger.databaseConnectionError(~port, exn)
-     });
+  |> Db.Lwt_thread.on_failure(_, exn => {Logger.databaseConnectionError(exn)});
 
   let on_exn =
     fun
