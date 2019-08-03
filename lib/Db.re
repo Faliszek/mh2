@@ -50,34 +50,4 @@ module User = {
          |> List.head
          |> Option.map(~f=((id, email, password)) => {id, email, password})
        });
-  // module Query = {s
-  //   let get =
-  //     connect()
-  //     |> [%sqlf {|
-  //           SELECT * FROM users;
-  //       |}]
-  //     |> List.map(user => {
-  //          let (id, email, password) = user;
-  //          let id = Tablecloth.Option.withDefault(~default="", id);
-  //          let email = Tablecloth.Option.withDefault(~default="", email);
-  //          let password =
-  //            Tablecloth.Option.withDefault(~default="", password);
-  //          {id, email, password};
-  //        });
-  //
-  // };
-  // let getByEmail = (~email) =>
-  //   connect()
-  //   |> Query.getByEmail(~email)
-  //   |> List.map(user => {
-  //        let (id, email, password) = user;
-  //        {
-  //          id: Tablecloth.Option.withDefault(~default="", id),
-  //          email: Tablecloth.Option.withDefault(~default="", email),
-  //          password: Tablecloth.Option.withDefault(~default="", password),
-  //        };
-  //      });
-  // let add = [%sqlf {|
-  //   INSERT INTO users VALUES ($user_id);
-  // |}];
-} /* let init = () => runQuery(Query.initialize)*/;
+};

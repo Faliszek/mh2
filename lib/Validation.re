@@ -1,3 +1,5 @@
+//NOTE: not used for now
+
 module Email = {
   let validate = email => {
     let regexp = Str.regexp("^.*[@].*$");

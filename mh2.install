@@ -5,12 +5,12 @@ lib: [
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Auth_Domain.re" {"lib/Auth_Domain.re"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Auth_Graphql.re" {"lib/Auth_Graphql.re"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Db.re" {"lib/Db.re"}
+  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Logger.re" {"lib/Logger.re"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Mh2.a" {"lib/Mh2.a"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Mh2.cma" {"lib/Mh2.cma"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Mh2.cmxa" {"lib/Mh2.cmxa"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Mh2.cmxs" {"lib/Mh2.cmxs"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Server.re" {"lib/Server.re"}
-  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Sql_Example.re" {"lib/Sql_Example.re"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Utils.re" {"lib/Utils.re"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/Validation.re" {"lib/Validation.re"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2.cmi" {"lib/mh2.cmi"}
@@ -29,12 +29,12 @@ lib: [
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Db.cmi" {"lib/mh2__Db.cmi"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Db.cmt" {"lib/mh2__Db.cmt"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Db.cmx" {"lib/mh2__Db.cmx"}
+  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Logger.cmi" {"lib/mh2__Logger.cmi"}
+  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Logger.cmt" {"lib/mh2__Logger.cmt"}
+  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Logger.cmx" {"lib/mh2__Logger.cmx"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Server.cmi" {"lib/mh2__Server.cmi"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Server.cmt" {"lib/mh2__Server.cmt"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Server.cmx" {"lib/mh2__Server.cmx"}
-  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Sql_Example.cmi" {"lib/mh2__Sql_Example.cmi"}
-  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Sql_Example.cmt" {"lib/mh2__Sql_Example.cmt"}
-  "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Sql_Example.cmx" {"lib/mh2__Sql_Example.cmx"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Utils.cmi" {"lib/mh2__Utils.cmi"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Utils.cmt" {"lib/mh2__Utils.cmt"}
   "/Users/pawelfalisz/Documents/Reason/mh2/_esy/default/store/b/mh2-c266ae3e/install/default/lib/mh2/lib/mh2__Utils.cmx" {"lib/mh2__Utils.cmx"}

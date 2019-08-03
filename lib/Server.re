@@ -11,6 +11,11 @@ let schema =
 let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   open Cohttp_lwt_unix;
 
+  Db.connect()
+  |> Db.Lwt_thread.on_failure(_, exn => {
+       Logger.databaseConnectionError(~port, exn)
+     });
+
   let on_exn =
     fun
     | [@implicit_arity] Unix.Unix_error(error, func, arg) =>
@@ -29,6 +34,5 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   let mode = `TCP(`Port(port));
   let port = port |> string_of_int;
   print_endline("🐫 Server GraphQL running on " ++ port);
-  Db.connect() |> ignore;
   Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
 };

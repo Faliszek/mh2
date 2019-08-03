@@ -1,24 +1,17 @@
 open Db;
 open Jwto;
 
-let createToken = (~email, ~password) => {
-  let hashedPassword = Bcrypt.hash(password);
-  // let allow = (args) => "hello";
-
-  print_endline(hashedPassword |> Bcrypt.string_of_hash);
-};
-
-//TODO: this function probably should return some record
-//with informaiton if email exist, option(token) etc.
-let expirationDateInMs = days => 1000.0 *. 60.0 *. 60.0 *. 24.0 *. days;
+let expirationDateInMs = (~days) => 1000.0 *. 60.0 *. 60.0 *. 24.0 *. days;
 
 let createSignedToken = (~id) => {
-  let expirationDate = Unix.time() +. expirationDateInMs(2.0);
-
+  let expirationDate = Unix.time() +. expirationDateInMs(~days=2.0);
   let payload = [("sub", id), ("exp", expirationDate |> string_of_float)];
 
   Jwto.encode(Jwto.HS512, "secret", payload);
 };
+
+//TODO: this function probably should return some record
+//with informaiton if email exist, option(token) etc. for now option(token) is cool
 let authenticateUser = (~email, ~password) => {
   Db.User.getByEmail(~email)
   |> Lwt.map((user: option(User.t)) => {
