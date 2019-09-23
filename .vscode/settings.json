@@ -1,8 +1,8 @@
 {
   "files.exclude": {
-    "_esy": true,
+    // "_esy": true,
     ".ci": true,
-    "esy.lock": true,
+    // "esy.lock": true,
     "node_modules": true,
     "**/.DS_Store": true,
     "**/dune": true,

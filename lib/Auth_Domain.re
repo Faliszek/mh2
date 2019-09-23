@@ -20,6 +20,7 @@ let authenticateUser = (~email, ~password) => {
            when
              Bcrypt.verify(password, user.password |> Bcrypt.hash_of_string) =>
          let token = createSignedToken(~id=user.id);
+
          switch (token) {
          | Ok(token) => Some(token)
          | Error(err) => None
