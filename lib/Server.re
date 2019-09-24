@@ -31,6 +31,8 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   let server = Cohttp_lwt_unix.Server.make_response_action(~callback, ());
   let mode = `TCP(`Port(port));
 
-  Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
   Logger.serverStartSuccess(~port);
+
+  Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
+
 };
