@@ -2,6 +2,7 @@ open Tablecloth;
 
 module Lwt_thread = {
   include Lwt;
+
   let close_in = Lwt_io.close;
   let really_input = Lwt_io.read_into_exactly;
   let input_binary_int = Lwt_io.BE.read_int;

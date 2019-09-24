@@ -3,55 +3,50 @@
   "version": "0.0.0",
   "description": "My Project",
   "esy": {
-    "build": "pesy",
+    "build": "refmterr dune build -p #{self.name}",
+    "NOTE": "Optional release Section. Customizes result of `esy release`",
     "release": {
       "releasedBinaries": [
         "Server.exe"
       ]
+    },
+    "buildEnv": {
+      "ODOC_SYNTAX": "re"
     }
   },
   "buildDirs": {
-    "test": {
-      "require": [
-        "mh2.lib"
-      ],
-      "main": "TestMh2",
-      "name": "TestMh2.exe"
-    },
     "lib": {
-      "require": [
-        "graphql-lwt",
-        "graphql-cohttp",
-        "cohttp",
-        "cohttp-lwt-unix",
-        "safepass",
-        "ppx_pgsql",
-        "pgocaml",
-        "tablecloth-native",
-        "jwto",
-        "unix"
+      "imports": [
+        "Tablecloth = require('tablecloth-native')",
+        "Lwt = require('lwt')",
+        "Pgocaml = require('pgocaml')",
+        "Jwto = require('jwto')",
+        "Graphql_cohttp = require('graphql-cohttp')",
+        "Graphql_lwt = require('graphql-lwt')",
+        "Cohttp = require('cohttp')",
+        "Cohttp_lwt_unix = require('cohttp-lwt-unix')",
+        "Safepass = require('safepass')"
       ],
       "preprocess": [
         "pps",
         "ppx_pgsql",
         "ppxlib.runner",
         "lwt_ppx"
-      ],
-      "name": "mh2.lib",
-      "namespace": "Mh2"
+      ]
     },
     "bin": {
-      "require": [
-        "mh2.lib"
+      "imports": [
+        "Library = require('mh2/lib')"
       ],
-      "main": "Server",
-      "name": "Server.exe"
+      "bin": {
+        "Server.exe": "Server.re"
+      }
     }
   },
   "scripts": {
     "pesy": "bash -c 'env PESY_MODE=update pesy'",
     "test": "esy x TestMh2.exe",
-    "run": "esy x Server.exe"
+    "start": "esy x Server.exe"
   },
   "dependencies": {
     "@esy-ocaml/reason": "*",
@@ -67,11 +62,13 @@
     "@opam/yojson": "*",
     "@opam/jwto": "*",
     "@opam/tablecloth-native": "0.0.3",
-    "ocaml": "4.7.1004",
-    "pesy": "*",
+    "ocaml": "~4.7.0",
     "refmterr": "*"
   },
   "devDependencies": {
-    "@opam/merlin": "*"
+    "@opam/merlin": "*",
+    "ocaml": "~4.7.0",
+    "@opam/odoc": "*",
+    "@pesy/esy-pesy": "0.1.0-alpha.2"
   }
 }
