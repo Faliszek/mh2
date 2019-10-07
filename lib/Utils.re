@@ -1,4 +1,5 @@
-//NOTE: not used for now
+/* NOTE: not used for now */
+
 module List = {
   let collect: list(option('t)) => list('t) =
     arr =>
@@ -11,6 +12,4 @@ module List = {
              },
            [],
          );
-
-
 };

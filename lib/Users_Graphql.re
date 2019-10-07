@@ -29,6 +29,6 @@ let list: Graphql_lwt.Schema.field(unit, unit) =
       ~args=Arg.[],
       ~typ=non_null(list(non_null(user))),
       ~resolve=(_, u) => {
-      Users_Domain.getAll() |> Lwt_main.run |> Lwt_result.return
+      Users_Domain.getAll() |> Lwt_result.ok
     })
   );

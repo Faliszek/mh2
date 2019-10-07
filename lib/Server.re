@@ -12,7 +12,7 @@ let schema =
 
 let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   open Cohttp_lwt_unix;
-  //TODO: handle failure better, also dont run server if connection is not established
+  /*TODO: handle failure better, also dont run server if connection is not established */
   Db.connect() |> Db.Lwt_thread.on_failure(_, Logger.databaseConnectionError);
 
   let on_exn =

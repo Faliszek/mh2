@@ -76,13 +76,16 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
           arg("password", ~typ=non_null(string)),
         ],
       ~resolve=(ctx, _, email, password) => {
-        let token = authenticateUser(~email, ~password) |> Lwt_main.run;
         let loginResponse =
-          switch (token) {
-          | Some(token) => {errors: None, result: Some({token: token})}
-          | None => {errors: Some([WrongCredentials]), result: None}
-          };
-        Lwt_result.return(loginResponse);
+          authenticateUser(~email, ~password)
+          |> Lwt.map(token =>
+               switch (token) {
+               | Some(token) => {errors: None, result: Some({token: token})}
+               | None => {errors: Some([WrongCredentials]), result: None}
+               }
+             );
+
+        Lwt_result.ok(loginResponse);
       },
     )
   );
