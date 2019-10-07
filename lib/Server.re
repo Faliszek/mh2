@@ -6,7 +6,9 @@ module Graphql_cohttp_lwt =
   );
 
 let schema =
-  Graphql_lwt.Schema.(schema([], ~mutations=[Auth.Graphql.loginMutation]));
+  Graphql_lwt.Schema.(
+    schema([Users.Graphql.list], ~mutations=[Auth.Graphql.loginMutation])
+  );
 
 let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   open Cohttp_lwt_unix;
@@ -34,5 +36,4 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   Logger.serverStartSuccess(~port);
 
   Lwt_main.run(Cohttp_lwt_unix.Server.create(~on_exn, ~mode, server));
-
 };

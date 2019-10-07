@@ -35,7 +35,16 @@ module User = {
     password: string,
   };
 
+  type user = {
+    id: string,
+    email: string,
+  };
+
   module Query = {
+    let all = [%sqlf {|
+        SELECT * from users;
+      |}];
+
     let getByEmail = [%sqlf
       {|
        SELECT * FROM users WHERE email = $email LIMIT 1;
@@ -51,4 +60,11 @@ module User = {
          |> List.head
          |> Option.map(~f=((id, email, password)) => {id, email, password})
        });
+
+  let getAll = () =>
+    Query.all
+    |> runQuery
+    |> Lwt.map(users =>
+         users |> List.map(~f=((id, email, _)) => {id, email})
+       );
 };

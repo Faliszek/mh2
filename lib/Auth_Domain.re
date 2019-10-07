@@ -10,8 +10,9 @@ let createSignedToken = (~id) => {
   Jwto.encode(Jwto.HS512, "secret", payload);
 };
 
-//TODO: this function probably should return some record
-//with informaiton if email exist, option(token) etc. for now option(token) is cool
+/*TODO: this function probably should return some record
+  //with informaiton if email exist, option(token) etc. for now option(token) is cool */
+
 let authenticateUser = (~email, ~password) => {
   Db.User.getByEmail(~email)
   |> Lwt.map((user: option(User.t)) => {
