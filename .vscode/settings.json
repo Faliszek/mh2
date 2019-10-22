@@ -4,9 +4,9 @@
     ".ci": true,
     // "esy.lock": true,
     "node_modules": true,
-    "**/.DS_Store": true,
+    "**/.DS_Store": true
     // "**/dune": true,
-    "**/.merlin": true
+    // "**/.merlin": true
   },
   "reason_language_server.reloadOnChange": true,
   "reason_language_server.show_debug_errors": true

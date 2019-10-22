@@ -6,9 +6,17 @@ module Graphql_cohttp_lwt =
   );
 
 let schema =
-  Graphql_lwt.Schema.(
-    schema([Users.Graphql.list], ~mutations=[Auth.Graphql.loginMutation])
-  );
+  { open Graphql_lwt.Schema;
+    schema(
+      [Users.Graphql.list, Users.Graphql.one],
+      ~mutations=[Auth.Graphql.loginMutation],
+    )
+  ; };
+
+/* Access-Control-Allow-Headers: content-type
+   // Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE
+   // Access-Control-Allow-Origin: *
+   // Allow: POST, GET, OPTIONS, PUT, DELETE */
 
 let run = (~addres="127.0.0.1", ~port=6789, ()) => {
   open Cohttp_lwt_unix;
@@ -17,7 +25,7 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
 
   let on_exn =
     fun
-    | [@implicit_arity] Unix.Unix_error(error, func, arg) =>
+    | Unix.Unix_error(error, func, arg) =>
       Logs.warn(m =>
         m(
           "Client connection error %s: %s(%S)",
@@ -26,10 +34,10 @@ let run = (~addres="127.0.0.1", ~port=6789, ()) => {
           arg,
         )
       )
-
     | exn => Logger.serverStartFailure(exn);
 
-  let callback = Graphql_cohttp_lwt.make_callback(_req => (), schema);
+  let callback =
+    Graphql_cohttp_lwt.make_callback(req => print_endline("req"), schema);
   let server = Cohttp_lwt_unix.Server.make_response_action(~callback, ());
   let mode = `TCP(`Port(port));
 

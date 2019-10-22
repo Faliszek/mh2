@@ -8,9 +8,12 @@ type authError =
 type tokenPayloadDTO = {token: string};
 
 type loginResponse = {
+
   result: option(tokenPayloadDTO),
   errors: option(list(authError)),
 };
+
+
 
 let authError: Graphql_lwt.Schema.typ(unit, option(authError)) =
   Schema.(
@@ -66,7 +69,7 @@ let loginResponse: Graphql_lwt.Schema.typ(unit, option(loginResponse)) =
   );
 
 let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
-  Schema.(
+  { open Schema;
     io_field(
       "login",
       ~typ=non_null(loginResponse),
@@ -88,4 +91,4 @@ let loginMutation: Graphql_lwt.Schema.field(unit, unit) =
         Lwt_result.ok(loginResponse);
       },
     )
-  );
+  ; };

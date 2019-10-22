@@ -1,20 +1,12 @@
-(library (name Mh2Lib) (public_name mh2.lib)
-    (modules (:standard \ Mh2LibPesyModules))
-    (libraries mh2.lib.pesy-modules) (flags -open Mh2LibPesyModules)
-    (preprocess (pps ppx_pgsql ppxlib.runner lwt_ppx)))
-(library (public_name mh2.lib.pesy-modules) (name Mh2LibPesyModules)
-    (modules Mh2LibPesyModules)
-    (libraries cohttp cohttp-lwt-unix graphql-cohttp graphql-lwt jwto lwt
-        pgocaml safepass tablecloth-native))
-(rule
-    (with-stdout-to Mh2LibPesyModules.re
-        (run echo
-             "module Tablecloth = Tablecloth;\
-            \nmodule Lwt = Lwt;\
-            \nmodule Pgocaml = Pgocaml;\
-            \nmodule Jwto = Jwto;\
-            \nmodule Graphql_cohttp = Graphql_cohttp;\
-            \nmodule Graphql_lwt = Graphql_lwt;\
-            \nmodule Cohttp = Cohttp;\
-            \nmodule Cohttp_lwt_unix = Cohttp_lwt_unix;\
-            \nmodule Safepass = Safepass;")))
+
+; !!!! This dune file is generated from the package.json file by pesy. If you modify it by hand
+; !!!! your changes will be undone! Instead, edit the package.json and then rerun 'esy pesy' at the project root.
+; !!!! If you want to stop using pesy and manage this file by hand, change package.json's 'esy.build' command to: refmterr dune build -p  mh2
+(library
+   ; The namespace that other packages/libraries will access this library through
+   (name Mh2)
+   ; Other libraries list this name in their package.json 'require' field to use this library.
+   (public_name mh2.lib)
+   (libraries  tablecloth-native lwt pgocaml jwto graphql-cohttp graphql-lwt cohttp cohttp-lwt-unix safepass unix )
+   (preprocess ( pps ppx_pgsql ppxlib.runner lwt_ppx ))  ; From package.json preprocess field
+)

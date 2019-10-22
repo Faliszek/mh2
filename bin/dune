@@ -1,8 +1,11 @@
-(executable (name Server) (modules (:standard \ Mh2BinPesyModules))
-    (public_name Server.exe) (libraries mh2.bin.pesy-modules)
-    (flags -open Mh2BinPesyModules))
-(library (public_name mh2.bin.pesy-modules) (name Mh2BinPesyModules)
-    (modules Mh2BinPesyModules) (libraries mh2.lib))
-(rule
-    (with-stdout-to Mh2BinPesyModules.re
-        (run echo "module Library = Mh2Lib;")))
+
+; !!!! This dune file is generated from the package.json file by pesy. If you modify it by hand
+; !!!! your changes will be undone! Instead, edit the package.json and then rerun 'esy pesy' at the project root.
+; !!!! If you want to stop using pesy and manage this file by hand, change package.json's 'esy.build' command to: refmterr dune build -p  mh2
+(executable
+   ; The entrypoint module
+   (name Server)  ;  From package.json main field
+   ; The name of the executable (runnable via esy x Server.exe) 
+   (public_name Server.exe)  ;  From package.json name field
+   (libraries  mh2.lib ) ;  From package.json require field (array of strings)
+)

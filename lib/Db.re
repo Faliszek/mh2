@@ -29,26 +29,34 @@ let runQuery = f => withPool(f);
 module PGOCaml = PostgreSQL;
 
 module User = {
+  open Tablecloth;
+
   type t = {
     id: string,
     email: string,
     password: string,
   };
 
-  type user = {
+  type userWithoutPassword = {
     id: string,
     email: string,
   };
 
   module Query = {
     let all = [%sqlf {|
-        SELECT * from users;
-      |}];
+      SELECT * from users;
+    |}];
 
     let getByEmail = [%sqlf
       {|
-       SELECT * FROM users WHERE email = $email LIMIT 1;
-      |}
+      SELECT * FROM users WHERE email = $email LIMIT 1;
+    |}
+    ];
+
+    let getById = [%sqlf
+      {|
+      SELECT * FROM users WHERE user_id = $id LIMIT 1;
+    |}
     ];
   };
 
@@ -59,6 +67,13 @@ module User = {
          user
          |> List.head
          |> Option.map(~f=((id, email, password)) => {id, email, password})
+       });
+
+  let getOne = (~id) =>
+    Query.getById(~id)
+    |> runQuery
+    |> Lwt.map(user => {
+         user |> List.head |> Option.map(~f=((id, email, _)) => {id, email})
        });
 
   let getAll = () =>

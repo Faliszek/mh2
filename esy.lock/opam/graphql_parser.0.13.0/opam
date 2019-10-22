@@ -13,16 +13,16 @@ build: [
 
 depends: [
   "ocaml" {>= "4.03.0"}
-  "dune"
+  "dune" {>= "1.1"}
   "menhir" {build}
   "alcotest" {with-test & >= "0.8.1"}
-  "fmt" {< "0.8.7"}
+  "fmt"
   "re" {>= "1.5.0"}
 ]
 
 synopsis: "Library for parsing GraphQL queries"
 
 url {
-archive: "https://github.com/andreas/ocaml-graphql-server/releases/download/0.12.2/graphql-0.12.2.tbz"
-checksum: "d7c79e9527a57051b40c005c36cf236f"
+archive: "https://github.com/andreas/ocaml-graphql-server/releases/download/0.13.0/graphql-0.13.0.tbz"
+checksum: "089104444ae28ebcfa85fec88628507a"
 }

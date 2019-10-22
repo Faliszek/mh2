@@ -1,8 +1,7 @@
 open Graphql_lwt;
-open Db.User;
 open Tablecloth;
 
-let user: Schema.typ(unit, option(user)) =
+let user: Schema.typ(unit, option(Db.User.userWithoutPassword)) =
   Schema.(
     obj("user", ~doc="A user in the system", ~fields=_ =>
       [
@@ -11,10 +10,14 @@ let user: Schema.typ(unit, option(user)) =
           ~doc="Unique user identifier",
           ~args=Arg.[],
           ~typ=non_null(string),
-          ~resolve=(info, p) =>
+          ~resolve=(info, p: Db.User.userWithoutPassword) =>
           p.id
         ),
-        field("email", ~typ=non_null(string), ~args=[], ~resolve=(info, p) =>
+        field(
+          "email",
+          ~typ=non_null(string),
+          ~args=[],
+          ~resolve=(info, p: Db.User.userWithoutPassword) =>
           p.email
         ),
       ]
@@ -30,5 +33,16 @@ let list: Graphql_lwt.Schema.field(unit, unit) =
       ~typ=non_null(list(non_null(user))),
       ~resolve=(_, u) => {
       Users_Domain.getAll() |> Lwt_result.ok
+    })
+  );
+
+let one: Graphql_lwt.Schema.field(unit, unit) =
+  Schema.(
+    io_field(
+      "user",
+      ~args=Arg.[arg("id", non_null(string))],
+      ~typ=user,
+      ~resolve=(_, u, id) => {
+      Users_Domain.getOne(~id) |> Lwt_result.ok
     })
   );
